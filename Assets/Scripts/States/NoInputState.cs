@@ -4,7 +4,8 @@ public class NoInputState : BaseState
 {
 	
 	
-	public NoInputState()
+	public NoInputState(FactoryStateMachine factory): 
+	base(factory)
 	{
 		
 	}
@@ -12,28 +13,28 @@ public class NoInputState : BaseState
 	public override void Enter()
 	{
 		//подписаться на WarehouseChange
-		warehouse.ResourceChanged += CheckInput();
+		warehouse.ResourceChanged += CheckInput;
 	}
 
 	public override void Exit()
 	{
 		//отписаться от WarehouseChange
-		warehouse.ResourceChanged -= CheckInput();
+		warehouse.ResourceChanged -= CheckInput;
 	}
 	
 	public void CheckInput()
 	{
-		if (warehouse.SpendResource
+		if (warehouse.CanSpendResource
 			(inputResourceType,inputResourceCount)== true)
 		{
-			stateSwitcher.SwitchState<HasInputState>();
+			_stateSwitcher.SwitchState<HasInputState>();
 		}
 	}
 	
 	//input resource
-	public override void LoadInput();
-	public override void UnloadInput();
+	public override void LoadInput(){}
+	public override void UnloadInput() {}
 
 	//output resource
-	public override void UnloadOutput();
+	public override void UnloadOutput(){}
 }

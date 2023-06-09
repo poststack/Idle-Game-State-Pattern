@@ -2,11 +2,11 @@
 
 public abstract class BaseState
 {
-	protected string stateName;
+	//protected string stateName;
 	protected string InfoString;
 	protected FactoryStateMachine factory;
 	protected Warehouse warehouse;
-	protected IStateSwitcher stateSwitcher;
+	protected IStateSwitcher _stateSwitcher;
 	
 	//input
 	protected ResourceType inputResourceType;
@@ -21,28 +21,19 @@ public abstract class BaseState
 	
 	
 	public BaseState(
-		string stateName,
-		string InfoString,
-		FactoryStateMachine factory,
-		Warehouse warehouse,
-		IStateSwitcher stateSwitcher,
-		ResourceType inputResourceType,
-		int inputResourceCount,
-		ResourceType outputResourceType,
-		int outputResourceCount,
-		float timeToProduce
+		FactoryStateMachine factory
 		)
 	{
-		stateName = stateName;
-		InfoString = InfoString;
+		//stateName = stateName;
+		//InfoString = InfoString;
 		factory = factory;
-		warehouse = warehouse;
-		stateSwitcher = stateSwitcher;
-		inputResourceType = inputResourceType;
-		inputResourceCount = inputResourceCount;
-		outputResourceType = outputResourceType;
-		outputResourceCount = outputResourceCount;
-		timeToProduce = timeToProduce;
+		warehouse = factory.warehouse;
+		_stateSwitcher = factory.stateSwitcher;
+		inputResourceType = factory.inputResourceType;
+		inputResourceCount = factory.inputResourceCount;
+		outputResourceType = factory.outputResourceType;
+		outputResourceCount = factory.outputResourceCount;
+		timeToProduce = factory.timeToProduce;
 	}
 	
 	public abstract void Enter();

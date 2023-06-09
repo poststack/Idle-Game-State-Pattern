@@ -2,20 +2,19 @@
 
 public class IdleState : BaseState
 {
-	public IdleState()
+	public IdleState(FactoryStateMachine factory): 
+	base(factory)
 	{
-	
+		
 	}
 
 	public override void Enter()
 	{
-		//надпись старт <- стоп
+		
 
 	}
 	public override void Exit()
 	{
-		//надпись старт -> стоп
-		//stateSwitcher.SwitchState<NoInputState>();
 
 	}
 
@@ -24,8 +23,14 @@ public class IdleState : BaseState
 	{
 		InfoString = "нет необходимости загружать ресурсы";
 	}
-	public override void UnloadInput();
+	public override void UnloadInput()
+	{
+		
+	}
 
 	//output resource
-	public override void UnloadOutput();
+	public override void UnloadOutput()
+	{
+		
+	}
 }

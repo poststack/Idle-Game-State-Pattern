@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class Warehouse 
 {
 	
-	public UnityEvent ResourceChanged;
+	public UnityAction  ResourceChanged;
 
 	public Dictionary<ResourceType, int> resources;
 
@@ -18,17 +18,24 @@ public class Warehouse
 		resources.Add(ResourceType.Iron, 0);
 	}
 
-	public bool SpendResource(ResourceType resourceType, int amount)
+
+	public bool CanSpendResource(ResourceType resourceType, int amount)
 	{
 		if (resources[resourceType] >= amount)
 		{
-			resources[resourceType] -= amount;
 			return true;
 		}
 		else
 		{
 			return false;
 		}
+	}
+
+
+	public void SpendResource(ResourceType resourceType, int amount)
+	{
+		resources[resourceType] -= amount;
+
 	}
 
 	public void AddResource(ResourceType resourceType, int amount)
