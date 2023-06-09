@@ -10,7 +10,7 @@ public class IdleState : BaseState
 
 	public override void Enter()
 	{
-		
+		factory.DebugLog("test");
 
 	}
 	public override void Exit()

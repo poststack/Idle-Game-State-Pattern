@@ -1,5 +1,6 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
+﻿
+
+
 
 public class WorkingState : BaseState
 {
@@ -13,12 +14,19 @@ public class WorkingState : BaseState
 	{
 		warehouse.SpendResource(
 			inputResourceType,inputResourceCount);
-
+		factory.view.StartProduction(factory.timeToProduce);
 	}
+	
+	
+
+	
 	public override void Exit()
 	{
-		_stateSwitcher.SwitchState<NoInputState>();
+		UnloadOutput();
+		
 	}
+	
+
 
 
 
@@ -28,5 +36,8 @@ public class WorkingState : BaseState
 	public override void UnloadInput() {}
 
 	//output resource
-	public override void UnloadOutput(){}
+	public override void UnloadOutput(){
+		factory.warehouse.AddResource
+			(outputResourceType,outputResourceCount);
+	}
 }

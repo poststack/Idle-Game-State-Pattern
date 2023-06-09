@@ -6,7 +6,6 @@ public abstract class BaseState
 	protected string InfoString;
 	protected FactoryStateMachine factory;
 	protected Warehouse warehouse;
-	protected IStateSwitcher _stateSwitcher;
 	
 	//input
 	protected ResourceType inputResourceType;
@@ -21,14 +20,13 @@ public abstract class BaseState
 	
 	
 	public BaseState(
-		FactoryStateMachine factory
+		FactoryStateMachine factoryParameter
 		)
 	{
 		//stateName = stateName;
 		//InfoString = InfoString;
-		factory = factory;
+		factory = factoryParameter;
 		warehouse = factory.warehouse;
-		_stateSwitcher = factory.stateSwitcher;
 		inputResourceType = factory.inputResourceType;
 		inputResourceCount = factory.inputResourceCount;
 		outputResourceType = factory.outputResourceType;

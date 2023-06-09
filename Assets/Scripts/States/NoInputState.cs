@@ -4,6 +4,7 @@ public class NoInputState : BaseState
 {
 	
 	
+	
 	public NoInputState(FactoryStateMachine factory): 
 	base(factory)
 	{
@@ -12,8 +13,11 @@ public class NoInputState : BaseState
 	
 	public override void Enter()
 	{
+		
 		//подписаться на WarehouseChange
 		warehouse.ResourceChanged += CheckInput;
+		//factory.AddToDebug("Enter NoInputState");
+		CheckInput();
 	}
 
 	public override void Exit()
@@ -23,11 +27,13 @@ public class NoInputState : BaseState
 	}
 	
 	public void CheckInput()
+	
 	{
+		//factory.DebugLog(_stateSwitcher.ToString());
 		if (warehouse.CanSpendResource
 			(inputResourceType,inputResourceCount)== true)
 		{
-			_stateSwitcher.SwitchState<HasInputState>();
+			factory.SwitchState<HasInputState>();
 		}
 	}
 	

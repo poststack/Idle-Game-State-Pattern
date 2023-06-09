@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public sealed class CoroutineExecuter : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public sealed class CoroutineExecuter : MonoBehaviour
 	
 	private static CoroutineExecuter _instance;
 	
+ 
+	
 	
 	public static Coroutine StartRoutine(IEnumerator enumerator)
 	{
@@ -29,6 +32,15 @@ public sealed class CoroutineExecuter : MonoBehaviour
 	{
 		instance.StopCoroutine(routine);
 	}	
+	
+	
+	
+	public static IEnumerator NeedsDelay(UnityAction afterDelay, float duration)
+	{
+		yield return new WaitForSeconds(duration);
+		afterDelay?.Invoke();
+	}
+
 	
 	//instance.StartCoroutine(NeedsDelay(() =>
 	//{

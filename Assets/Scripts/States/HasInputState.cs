@@ -10,7 +10,7 @@ public class HasInputState : BaseState
 	
 	public override void Enter()
 	{
-		_stateSwitcher.SwitchState<WorkingState>();
+		factory.SwitchState<WorkingState>();
 	}
 	public override void Exit()
 	{
