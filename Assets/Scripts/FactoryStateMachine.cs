@@ -6,6 +6,10 @@ using UnityEngine;
 public class FactoryStateMachine : MonoBehaviour
 {
 	[SerializeField]
+	public bool isSwitchedOn;
+	[Space(10)]
+	
+	[SerializeField]
 	public Warehouse warehouse;
 	
 	[SerializeField]
@@ -34,6 +38,8 @@ public class FactoryStateMachine : MonoBehaviour
 	[SerializeField]
 	public float timeToProduce;
 	[SerializeField]
+	public float timeToSwitch;
+	[SerializeField]
 	public float productionProgress;
 	
 	[SerializeField]
@@ -60,29 +66,80 @@ public class FactoryStateMachine : MonoBehaviour
 		currentState = allStates[0];
 		DebugLog("Enter State" + currentState.ToString());;
 		currentState.Enter();
+		
+		//UI
+		view.updateUI();
+		view.updateButtonUI();
 	}
+	
+	public void StartProduction(float duration)
+	{
+		StartCoroutine(productionRoutine(duration));
+	}
+	
+	IEnumerator productionRoutine(float duration)
+	{
+		float time = 0f;
+		while (time < duration)
+		{
+			time += Time.deltaTime;
+			float lerpValue = time / duration;
+			productionProgress = Mathf.Lerp(0f, 1f, lerpValue);
+			yield return new WaitForEndOfFrame();
+			view.updateUI();
+		}
+		SwitchState<NoInputState>();
+	}
+	
+
+	
+	
+	
 	
 	public void SwitchState<T>() where T : BaseState 
 	{
 		
 		//DebugLog("SwitchState Invoked");
 		var state = allStates.FirstOrDefault(s => s is T);
+		StartCoroutine(switchingRoutine(timeToSwitch, state));
+
+	}
+	
+	
+	
+	IEnumerator switchingRoutine(float duration, BaseState state )
+	{
 		currentState.Exit();
 		DebugLog("Exit State" + currentState.ToString());;
 		currentState = state;
+		yield return new WaitForSeconds (duration);
 		currentStateString = currentState.ToString();
 		currentState.Enter();
 		DebugLog("Enter State" + currentState.ToString());;
 
-		
-	}
+		view.updateUI();
+
+	}	
 	
 	public void DebugLog(string stringToShow )
 	{
 		Debug.Log(gameObject.name + " " + stringToShow);
 	}
 
-
+	public void StartFactory()
+	{
+		SwitchState<NoInputState>();
+		isSwitchedOn = true;
+	}
+	
+	public void StopFactory()
+	{
+		SwitchState<IdleState>();
+		isSwitchedOn = false;
+		StopAllCoroutines();
+		productionProgress = 0;
+		view.updateUI();
+	}
 
 
 }

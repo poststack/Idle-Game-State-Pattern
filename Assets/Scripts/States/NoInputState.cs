@@ -35,6 +35,11 @@ public class NoInputState : BaseState
 		{
 			factory.SwitchState<HasInputState>();
 		}
+		else
+		{
+			//just idle
+			//factory.SwitchState<IdleState>();
+		}
 	}
 	
 	//input resource

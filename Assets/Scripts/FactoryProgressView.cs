@@ -2,33 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FactoryProgressView : MonoBehaviour
 {
+	//Progress
 	public float progress; //0 - 100
 	public Slider slider;
+	public Image ImageFillAmount;
+	
+	//other
+	public TextMeshProUGUI objectNameUI;
+	public TextMeshProUGUI currentStateUI;
+	public TextMeshProUGUI buttonCaption;
 	public FactoryStateMachine factory;
 	
+	 
 	
-	public void StartProduction(float duration)
-	{
-		StartCoroutine(AnimateSlider(duration));
+	
 
-	}
 	
-	IEnumerator AnimateSlider(float duration)
+	public void updateUI()
 	{
-		float time = 0f;
-		while (time < duration)
+		if (factory.currentState != null)
 		{
-			time += Time.deltaTime;
-			float lerpValue = time / duration;
-			slider.value = Mathf.Lerp(0f, 1f, lerpValue);
-			yield return null;
+			currentStateUI.text = factory.currentState.ToString();
 		}
-		factory.SwitchState<NoInputState>();
+		slider.value = factory.productionProgress;		
+		ImageFillAmount.fillAmount = factory.productionProgress;
 	}
+	
+	public void updateButtonUI()
+	{
+		string result = "error in ButtonCaption()";
+		
+		if (factory.isSwitchedOn)
+		{
+			result =  "Stop";
+		}
+		else
+		{
 
+			result =  "Start";
+		}
+		buttonCaption.text = result;
 
+		
+	}
+	
+	public void StartStopButtonAction()
+	{
+		if (factory.isSwitchedOn)
+		{
+			factory.StopFactory();
+		}
+		else
+		{
+
+			factory.StartFactory();
+		}
+		updateButtonUI();
+	}
 
 }

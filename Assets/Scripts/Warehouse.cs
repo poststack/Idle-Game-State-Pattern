@@ -2,32 +2,54 @@
 using UnityEngine.Events;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using DamageNumbersPro;
+
 
 
 public class Warehouse : MonoBehaviour
 {
 	
 	public UnityAction  ResourceChanged;
+	
+	public GameObject AddStockObject;
+	public DamageNumber numberPrefab;
 
-	[DictionaryDrawerSettings(KeyLabel = "Custom Key Name", ValueLabel = "Custom Value Label")]
-	public Dictionary<ResourceType, int> resources;
+
+	public int resourceCount = 4;
+	//Array on type = Array of count
+	public ResourceType[] types;
+	public int[] counts;
 
 	public ResourceType[] CanStore;
 	
 	[OnInspectorInit]
 	void Start()
 	{
-		resources = new Dictionary<ResourceType, int>();
-		resources.Add(ResourceType.Money, 0);
-		resources.Add(ResourceType.Wood, 0);
-		resources.Add(ResourceType.Stone, 0);
-		resources.Add(ResourceType.Iron, 0);
+		//resources = new Dictionary<ResourceType, int>();
+		//resources.Add(ResourceType.Money, 5);
+		//resources.Add(ResourceType.Wood, 5);
+		//resources.Add(ResourceType.Stone, 5);
+		//resources.Add(ResourceType.Iron, 5);
+		
+
+		
+		types = new ResourceType[resourceCount];
+		counts = new int[resourceCount];
+		
+		types[0] = ResourceType.Money;
+		
+		types[1] = ResourceType.Wood;
+		
+		types[2] = ResourceType.Stone;
+		
+		types[3] = ResourceType.Iron;
+		
 	}
 
 
 	public bool CanSpendResource(ResourceType resourceType, int amount)
 	{
-		if (resources[resourceType] >= amount)
+		if (counts[(int)(resourceType)] >= amount)
 		{
 			return true;
 		}
@@ -40,7 +62,7 @@ public class Warehouse : MonoBehaviour
 
 	public void SpendResource(ResourceType resourceType, int amount)
 	{
-		resources[resourceType] -= amount;
+		counts[(int)(resourceType)] -= amount;
 
 	}
 
@@ -49,8 +71,15 @@ public class Warehouse : MonoBehaviour
 		Debug.Log(gameObject.name + " "
 			+ resourceType.ToString() + " "
 			+ amount.ToString());
-		resources[resourceType] += amount;
+		counts[(int)(resourceType)] += amount;
 		ResourceChanged?.Invoke();
+		//GameObject Instantiate(AddStockObject,gameObject.transform);
+		
+		DamageNumber damageNumber = numberPrefab.Spawn
+			(gameObject.transform.position,
+			resourceType.ToString() + " "
+			+ amount.ToString());
+
 	}
 	
 	

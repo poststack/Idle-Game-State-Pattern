@@ -1,7 +1,7 @@
 ﻿public enum ResourceType
 {
-	Money,
-	Wood,
-	Stone,
-	Iron
+	Money = 0,
+	Wood = 1,
+	Stone = 2,
+	Iron = 3
 }
