@@ -15,6 +15,9 @@ public class FactoryStateMachine : MonoBehaviour
 	[SerializeField]
 	public FactoryProgressView view;
 	
+	[SerializeField]
+	public FactoryData factoryData;
+	
 	//________________________________
 	//ДАЛЕЕ ДОЛЖНО БЫТЬ ТАК
 	//public int MyProperty { get; private set; }
@@ -22,23 +25,23 @@ public class FactoryStateMachine : MonoBehaviour
 	//________________________________
 	
 	
-	//input
-	[SerializeField]
-	public ResourceType inputResourceType;
-	[SerializeField]
-	public int inputResourceCount;
+	////input
+	//[SerializeField]
+	//public ResourceType inputResourceType;
+	//[SerializeField]
+	//public int inputResourceCount;
 	
-	//output
-	[SerializeField]
-	public ResourceType outputResourceType;
-	[SerializeField]
-	public int outputResourceCount;
+	////output
+	//[SerializeField]
+	//public ResourceType outputResourceType;
+	//[SerializeField]
+	//public int outputResourceCount;
 	
-	//time
-	[SerializeField]
-	public float timeToProduce;
-	[SerializeField]
-	public float timeToSwitch;
+	////time
+	//[SerializeField]
+	//public float timeToProduce;
+	//[SerializeField]
+	//public float timeToSwitch;
 	[SerializeField]
 	public float productionProgress;
 	
@@ -101,7 +104,7 @@ public class FactoryStateMachine : MonoBehaviour
 		
 		//DebugLog("SwitchState Invoked");
 		var state = allStates.FirstOrDefault(s => s is T);
-		StartCoroutine(switchingRoutine(timeToSwitch, state));
+		StartCoroutine(switchingRoutine(factoryData.timeToSwitch, state));
 
 	}
 	

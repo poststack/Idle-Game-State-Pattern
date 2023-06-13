@@ -13,7 +13,7 @@ public class WorkingState : BaseState
 	public override void Enter()
 	{
 		LoadInput();
-		factory.StartProduction(factory.timeToProduce);
+		factoryController.StartProduction(factory.timeToProduce);
 	}
 	
 	
@@ -21,7 +21,7 @@ public class WorkingState : BaseState
 	
 	public override void Exit()
 	{
-		if (factory.productionProgress == 1)
+		if (factoryController.productionProgress == 1)
 		{
 			UnloadOutput();
 		}
@@ -45,14 +45,14 @@ public class WorkingState : BaseState
 	//input resource
 	public override void LoadInput()
 	{
-		factory.warehouse.SpendResource
+		factoryController.warehouse.SpendResource
 			(inputResourceType,inputResourceCount);
 	}
 	public override void UnloadInput() {}
 
 	//output resource
 	public override void UnloadOutput(){
-		factory.warehouse.AddResource
+		factoryController.warehouse.AddResource
 		(factory.outputResourceType,
 		 factory.outputResourceCount);
 	}

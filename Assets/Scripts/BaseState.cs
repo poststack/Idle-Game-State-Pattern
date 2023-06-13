@@ -4,7 +4,8 @@ public abstract class BaseState
 {
 	//protected string stateName;
 	protected string InfoString;
-	protected FactoryStateMachine factory;
+	protected FactoryData factory;
+	protected FactoryStateMachine factoryController;
 	protected Warehouse warehouse;
 	
 	//input
@@ -25,8 +26,8 @@ public abstract class BaseState
 	{
 		//stateName = stateName;
 		//InfoString = InfoString;
-		factory = factoryParameter;
-		warehouse = factory.warehouse;
+		factoryController = factoryParameter;
+		warehouse = factoryController.warehouse;
 		inputResourceType = factory.inputResourceType;
 		inputResourceCount = factory.inputResourceCount;
 		outputResourceType = factory.outputResourceType;

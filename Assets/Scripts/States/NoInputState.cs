@@ -33,7 +33,7 @@ public class NoInputState : BaseState
 		if (warehouse.CanSpendResource
 			(inputResourceType,inputResourceCount)== true)
 		{
-			factory.SwitchState<HasInputState>();
+			factoryController.SwitchState<HasInputState>();
 		}
 		else
 		{

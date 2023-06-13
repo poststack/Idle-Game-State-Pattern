@@ -6,7 +6,7 @@ using TMPro;
 
 public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-	public FactoryStateMachine factory;
+	public FactoryData factory;
 	
 	public Sprite[] sprites;
 	public Image image;

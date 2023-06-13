@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
-using Sirenix.OdinInspector;
 using DamageNumbersPro;
 
 
 
 public class Warehouse : MonoBehaviour
 {
-	
+	[SerializeField]
+	private WareHouseView view;
 	public UnityAction  ResourceChanged;
 	
 	public GameObject AddStockObject;
-	public DamageNumber numberPrefab;
+	public DamageNumber goodFloatingNumbers;
+	public DamageNumber badFloatingNumbers;
 
 
 	public int resourceCount = 4;
@@ -22,7 +23,6 @@ public class Warehouse : MonoBehaviour
 
 	public ResourceType[] CanStore;
 	
-	[OnInspectorInit]
 	void Start()
 	{
 		//resources = new Dictionary<ResourceType, int>();
@@ -63,6 +63,10 @@ public class Warehouse : MonoBehaviour
 	public void SpendResource(ResourceType resourceType, int amount)
 	{
 		counts[(int)(resourceType)] -= amount;
+		DamageNumber damageNumber = badFloatingNumbers.Spawn
+		(gameObject.transform.position,
+			resourceType.ToString() + " "
+			+ amount.ToString());
 
 	}
 
@@ -75,13 +79,19 @@ public class Warehouse : MonoBehaviour
 		ResourceChanged?.Invoke();
 		//GameObject Instantiate(AddStockObject,gameObject.transform);
 		
-		DamageNumber damageNumber = numberPrefab.Spawn
+		DamageNumber damageNumber = goodFloatingNumbers.Spawn
 			(gameObject.transform.position,
 			resourceType.ToString() + " "
 			+ amount.ToString());
 
 	}
 	
+	
+	private void updateUI()
+	{
+		
+		
+	}
 	
 	
 
