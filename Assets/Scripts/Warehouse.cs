@@ -63,10 +63,14 @@ public class Warehouse : MonoBehaviour
 	public void SpendResource(ResourceType resourceType, int amount)
 	{
 		counts[(int)(resourceType)] -= amount;
-		DamageNumber damageNumber = badFloatingNumbers.Spawn
-		(gameObject.transform.position,
-			resourceType.ToString() + " "
-			+ amount.ToString());
+		if (badFloatingNumbers != null)
+		{
+			DamageNumber damageNumber = badFloatingNumbers.Spawn
+			(gameObject.transform.position,
+				resourceType.ToString() + " "
+				+ amount.ToString());
+		}
+
 
 	}
 
@@ -79,10 +83,13 @@ public class Warehouse : MonoBehaviour
 		ResourceChanged?.Invoke();
 		//GameObject Instantiate(AddStockObject,gameObject.transform);
 		
-		DamageNumber damageNumber = goodFloatingNumbers.Spawn
-			(gameObject.transform.position,
-			resourceType.ToString() + " "
-			+ amount.ToString());
+		if (badFloatingNumbers != null)
+		{
+			DamageNumber damageNumber = goodFloatingNumbers.Spawn
+				(gameObject.transform.position,
+				resourceType.ToString() + " "
+				+ amount.ToString());
+		}
 
 	}
 	

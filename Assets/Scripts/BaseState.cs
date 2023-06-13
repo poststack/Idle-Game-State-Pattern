@@ -28,6 +28,7 @@ public abstract class BaseState
 		//InfoString = InfoString;
 		factoryController = factoryParameter;
 		warehouse = factoryController.warehouse;
+		factory = factoryController.factoryData;
 		inputResourceType = factory.inputResourceType;
 		inputResourceCount = factory.inputResourceCount;
 		outputResourceType = factory.outputResourceType;

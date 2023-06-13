@@ -9,13 +9,10 @@ public class FactoryStateMachine : MonoBehaviour
 	public bool isSwitchedOn;
 	[Space(10)]
 	
-	[SerializeField]
 	public Warehouse warehouse;
 	
-	[SerializeField]
 	public FactoryProgressView view;
 	
-	[SerializeField]
 	public FactoryData factoryData;
 	
 	//________________________________

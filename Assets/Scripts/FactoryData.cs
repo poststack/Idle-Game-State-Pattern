@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FactoryData 
+public class FactoryData : MonoBehaviour
 {
 	//input
 	public ResourceType inputResourceType;
