@@ -29,11 +29,11 @@ public abstract class BaseState
 		factoryController = factoryParameter;
 		warehouse = factoryController.warehouse;
 		factory = factoryController.factoryData;
-		inputResourceType = factory.inputResourceType;
-		inputResourceCount = factory.inputResourceCount;
-		outputResourceType = factory.outputResourceType;
-		outputResourceCount = factory.outputResourceCount;
-		timeToProduce = factory.timeToProduce;
+		//inputResourceType = factory.inputResourceType;
+		//inputResourceCount = factory.inputResourceCount;
+		//outputResourceType = factory.outputResourceType;
+		//outputResourceCount = factory.outputResourceCount;
+		//timeToProduce = factory.timeToProduce;
 	}
 	
 	public abstract void Enter();
