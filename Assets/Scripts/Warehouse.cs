@@ -71,6 +71,7 @@ public class Warehouse : MonoBehaviour
 				resourceType.ToString() + " "
 				+ amount.ToString());
 		}
+		view.updateInventoryUI( resourceType,  counts[(int)(resourceType)]);
 
 
 	}
@@ -91,7 +92,7 @@ public class Warehouse : MonoBehaviour
 				resourceType.ToString() + " "
 				+ amount.ToString());
 		}
-
+		view.updateInventoryUI( resourceType,  counts[(int)(resourceType)]);
 	}
 	
 	

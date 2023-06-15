@@ -16,6 +16,11 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 	private bool isMouseOver = false;
 
+	protected void Start()
+	{
+		DoSwitch();
+	}
+
 	private void Update()
 	{
 		if (!isMouseOver) return;
@@ -32,10 +37,15 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 			currentIndex++;
 			if (currentIndex >= sprites.Length) currentIndex = 0;
 		}
-
+		DoSwitch();
+	}
+	
+	private void DoSwitch()
+	{
 		image.sprite = sprites[currentIndex];
 		ResourceName.text = GetEnumStringByIndex(currentIndex);
 		factory.outputResourceType = GetEnumValueByIndex(currentIndex);
+
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
