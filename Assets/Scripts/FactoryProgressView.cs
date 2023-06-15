@@ -9,7 +9,7 @@ public class FactoryProgressView : MonoBehaviour
 	//Progress
 	public float progress; //0 - 100
 	public Slider slider;
-	public Image ImageFillAmount;
+	public Image ArrowToWarehouseFillAmount;
 	
 	//other
 	public TextMeshProUGUI objectNameUI;
@@ -29,7 +29,10 @@ public class FactoryProgressView : MonoBehaviour
 			currentStateUI.text = factory.currentState.ToString();
 		}
 		slider.value = factory.productionProgress;		
-		ImageFillAmount.fillAmount = factory.productionProgress;
+		if (ArrowToWarehouseFillAmount != null)
+		{
+			ArrowToWarehouseFillAmount.fillAmount = factory.productionProgress;
+		}
 	}
 	
 	public void updateButtonUI()

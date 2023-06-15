@@ -11,6 +11,10 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 	public Sprite[] sprites;
 	public Image image;
 	public TextMeshProUGUI ResourceName;
+	[Space (20)]
+	[Header ("LImits")]
+	public int lowLimit;
+	public int upLimit;
 
 	private int currentIndex = 0;
 
@@ -18,6 +22,7 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 	protected void Start()
 	{
+		currentIndex = lowLimit;
 		DoSwitch();
 	}
 
@@ -29,14 +34,26 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 		if (scroll > 0f)
 		{
-			currentIndex--;
-			if (currentIndex < 0) currentIndex = sprites.Length - 1;
+			SwitchDown();
 		}
 		else if (scroll < 0f)
 		{
-			currentIndex++;
-			if (currentIndex >= sprites.Length) currentIndex = 0;
+			SwitchUp();
 		}
+		
+	}
+	
+	public void SwitchUp()
+	{
+		currentIndex++;
+		if (currentIndex >= upLimit) currentIndex = lowLimit;
+		DoSwitch();
+	}
+	
+	public void SwitchDown()
+	{
+		currentIndex--;
+		if (currentIndex < lowLimit) currentIndex = upLimit - 1;
 		DoSwitch();
 	}
 	
