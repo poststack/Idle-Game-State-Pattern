@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using DG.Tweening;
+//using DG.Tweening;
 
 
 public class WareHouseView : MonoBehaviour
@@ -97,7 +97,7 @@ public class WareHouseView : MonoBehaviour
 
 	protected void Start()
 	{
-		DOTween.Init();
+		//DOTween.Init();
 		
 		moneyText = GameObjectToText(moneyInventoryPanel);
 		//moneyImage.sprite = moneySprite;
@@ -124,8 +124,12 @@ public class WareHouseView : MonoBehaviour
 			updatestone(amount);
 		else if(resourceType == ResourceType.Iron)
 			updateiron(amount);
-		else if(resourceType == ResourceType.Money)
-			updateMoney(amount);
+		else if(resourceType == ResourceType.Hammer)
+			updateHammer(amount);
+		else if(resourceType == ResourceType.Pitchfork)
+			updatePitchFork(amount);
+		else if(resourceType == ResourceType.Drill)
+			updateDrill(amount);
 	}
 	
 
@@ -134,8 +138,8 @@ public class WareHouseView : MonoBehaviour
 	{
 		initialSize = rectTransform.sizeDelta;
 		targetSize = initialSize*1.2f;
-		rectTransform.
-			DOSizeDelta(targetSize, 0.1f);//.OnComplete(Shrink(rectTransform));
+		//rectTransform.
+			//DOSizeDelta(targetSize, 0.1f);//.OnComplete(Shrink(rectTransform));
 	}
 	
 	private void Shrink(RectTransform rectTransform)

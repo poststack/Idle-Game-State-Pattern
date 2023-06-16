@@ -15,7 +15,7 @@ public class NoInputState : BaseState
 	{
 		
 		//подписаться на WarehouseChange
-		warehouse.ResourceChanged += CheckInput;
+		warehouse.OnResourceChanged += CheckInput;
 		//factory.AddToDebug("Enter NoInputState");
 		CheckInput();
 	}
@@ -23,17 +23,14 @@ public class NoInputState : BaseState
 	public override void Exit()
 	{
 		//отписаться от WarehouseChange
-		warehouse.ResourceChanged -= CheckInput;
+		warehouse.OnResourceChanged -= CheckInput;
 	}
 	
 	public void CheckInput()
 	
 	{
 		//Проверить все 
-		if (warehouse.CanSpendResource
-			(factory.inputResourceType[0],
-			factory.inputResourceCount[0])
-			== true)
+		if (CheckResources(factory.inputResources))
 		{
 			factoryController.SwitchState<HasInputState>();
 		}
@@ -44,17 +41,10 @@ public class NoInputState : BaseState
 		}
 	}
 	
-	//private bool CheckResources(ResourceType[] requiredResources, int[] amounts)
-	//{
-	//	foreach (ResourceType resource in requiredResources)
-	//	{
-	//		if (resource.Amount > ResourceManager.Instance.GetResourceAmount(resource.Type))
-	//		{
-	//			return false;
-	//		}
-	//	}
-	//	return true;
-	//}	
+	private bool CheckResources(Resource[] requiredResources)
+	{
+		return warehouse.CanSubtractMultipleResource(requiredResources);
+	}	
 	
 	//input resource
 	public override void LoadInput(){}

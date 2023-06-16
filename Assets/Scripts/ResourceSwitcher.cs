@@ -6,6 +6,7 @@ using TMPro;
 
 public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+	public GameObject UIButtonsUpDown;
 	public FactoryData factory;
 	
 	public Sprite[] sprites;
@@ -22,6 +23,7 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 	protected void Start()
 	{
+		UIButtonsUpDown.SetActive(true);
 		currentIndex = lowLimit;
 		DoSwitch();
 	}

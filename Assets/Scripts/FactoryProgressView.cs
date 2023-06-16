@@ -18,6 +18,13 @@ public class FactoryProgressView : MonoBehaviour
 	public FactoryStateMachine factory;
 	
 	 
+	void Start()
+	{
+		if (!gameObject.GetComponent<ResourceSwitcher>().enabled)
+		{
+			objectNameUI.text = factory.factoryData.outputResourceType[0].ToString();
+		}
+	}
 	
 	
 
@@ -65,6 +72,15 @@ public class FactoryProgressView : MonoBehaviour
 			factory.StartFactory();
 		}
 		updateButtonUI();
+	}
+	
+	
+	public void ResetProductionView()
+	{
+		factory.productionProgress = 0;
+		slider.value = 0;
+		ArrowToWarehouseFillAmount.fillAmount = 0;
+
 	}
 
 }

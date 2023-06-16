@@ -1,4 +1,9 @@
-﻿public enum ResourceType
+﻿using UnityEngine;
+using UnityEditor;
+using System.Collections.Generic;
+
+[System.Serializable]
+public enum ResourceType
 {
 	Money = 0,
 	Wood = 1,

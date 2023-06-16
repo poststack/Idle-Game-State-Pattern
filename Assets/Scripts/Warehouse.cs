@@ -7,102 +7,130 @@ using DamageNumbersPro;
 
 public class Warehouse : MonoBehaviour
 {
+	
+	[SerializeField]
+	private bool useCheat;
+	
 	[SerializeField]
 	private WareHouseView view;
-	public UnityAction  ResourceChanged;
+	public UnityAction  OnResourceChanged;
 	
 	public GameObject AddStockObject;
 	public DamageNumber goodFloatingNumbers;
 	public DamageNumber badFloatingNumbers;
 
 
-	public int resourceCount = 4;
-	//Array on type = Array of count
-	public ResourceType[] types;
-	public int[] counts;
 
-	public ResourceType[] CanStore;
+	[Space (10)]
+	public List<Resource> resources = new List<Resource>();
+
 	
-	void Start()
-	{
-		//resources = new Dictionary<ResourceType, int>();
-		//resources.Add(ResourceType.Money, 5);
-		//resources.Add(ResourceType.Wood, 5);
-		//resources.Add(ResourceType.Stone, 5);
-		//resources.Add(ResourceType.Iron, 5);
-		
 
-		
-		//types = new ResourceType[resourceCount];
-		//counts = new int[resourceCount];
-		
-		//types[0] = ResourceType.Money;
-		
-		//types[1] = ResourceType.Wood;
-		
-		//types[2] = ResourceType.Stone;
-		
-		//types[3] = ResourceType.Iron;
-		
+
+	protected void Start()
+	{
+		InitilizeWarehouse();
 	}
+	 private void InitilizeWarehouse()
+	 {
+		 for (int i = 0; i < System.Enum.GetValues(typeof(ResourceType)).Length; i++)
+		 {
+			 ResourceType type = (ResourceType)i;
+			 resources.Add(new Resource(type, 0));
+		 }
+		 
+		 //CHEAT
+		 if (useCheat) AddResource(ResourceType.Money,1000);
+	 }
 
 
-	public bool CanSpendResource(ResourceType resourceType, int amount)
+
+	
+	
+	
+	
+	public void AddResource(ResourceType type, int amount)
 	{
-		if (counts[(int)(resourceType)] >= amount)
+		Resource resource = resources.Find(r => r.Type == type);
+
+		if (resource != null)
 		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-
-	public void SpendResource(ResourceType resourceType, int amount)
-	{
-		counts[(int)(resourceType)] -= amount;
-		
-		if (badFloatingNumbers != null & amount != 0)
-		{
-			DamageNumber damageNumber = badFloatingNumbers.Spawn
-			(gameObject.transform.position,
-				resourceType.ToString() + " "
-				+ amount.ToString());
-		}
-		view.updateInventoryUI( resourceType,  counts[(int)(resourceType)]);
-
-
-	}
-
-	public void AddResource(ResourceType resourceType, int amount)
-	{
-		Debug.Log(gameObject.name + " "
-			+ resourceType.ToString() + " "
-			+ amount.ToString());
-		counts[(int)(resourceType)] += amount;
-		ResourceChanged?.Invoke();
-		//GameObject Instantiate(AddStockObject,gameObject.transform);
-		
-		if (badFloatingNumbers != null & amount != 0)
-		{
-			DamageNumber damageNumber = goodFloatingNumbers.Spawn
+			resource.AddAmount(amount);
+			
+			OnResourceChanged?.Invoke();
+			
+			if (badFloatingNumbers != null & amount != 0)
+			{
+				DamageNumber damageNumber = goodFloatingNumbers.Spawn
 				(gameObject.transform.position,
-				resourceType.ToString() + " "
-				+ amount.ToString());
+					type.ToString() + " "
+					+ amount.ToString());
+			}
+			view.updateInventoryUI( resource.Type,  resource.Amount);
 		}
-		view.updateInventoryUI( resourceType,  counts[(int)(resourceType)]);
 	}
 	
 	
-	private void updateUI()
+	
+
+	
+	public bool CanSubtractResource(ResourceType type, int amount)
 	{
-		
-		
+		Resource resource = resources.Find(r => r.Type == type);
+
+		if (resource != null)
+		{
+			return resource.Amount >= amount;
+		}
+
+		return false;
 	}
 	
+
 	
+	
+	public void SubtractResource(ResourceType type, int amount)
+	{
+		Resource resource = resources.Find(r => r.Type == type);
+
+		if (resource != null)
+		{
+			resource.SubtractAmount(amount);
+			
+			if (badFloatingNumbers != null & amount != 0)
+			{
+				DamageNumber damageNumber = badFloatingNumbers.Spawn
+				(gameObject.transform.position,
+					type.ToString() + " "
+					+ amount.ToString());
+			}
+			view.updateInventoryUI( resource.Type,  resource.Amount);
+		}
+	}
+
+
+
+
+	public bool CanSubtractMultipleResource(Resource[] requiredResources)
+	{
+		foreach (var requiredResource in requiredResources)
+		{
+			if (!CanSubtractResource(requiredResource.Type, requiredResource.Amount) )
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public void SubtractMultipleResource(Resource[] requiredResources)
+	{
+		foreach (var requiredResource in requiredResources)
+		{
+			SubtractResource(requiredResource.Type, requiredResource.Amount);
+		}
+	}
 
 
 }

@@ -141,5 +141,10 @@ public class FactoryStateMachine : MonoBehaviour
 		view.updateUI();
 	}
 
+	public void ResetProdution()
+	{
+		productionProgress = 0;
+		view.ResetProductionView();
+	}
 
 }

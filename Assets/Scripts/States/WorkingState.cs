@@ -30,7 +30,7 @@ public class WorkingState : BaseState
 			//resource waisted
 		}
 		
-		
+		factoryController.ResetProdution();
 		
 		
 	}
@@ -45,9 +45,8 @@ public class WorkingState : BaseState
 	//input resource
 	public override void LoadInput()
 	{
-		factoryController.warehouse.SpendResource
-			(factory.inputResourceType[0],
-			factory.inputResourceCount[0]);
+		factoryController.warehouse.SubtractMultipleResource(
+			factory.inputResources);
 	}
 	public override void UnloadInput() {}
 
