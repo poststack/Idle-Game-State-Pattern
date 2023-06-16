@@ -2042,10 +2042,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15690a8871dda9b479a5cae813c8469c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputResourceType: 0
-  inputResourceCount: 0
-  outputResourceType: 0
-  outputResourceCount: 7
+  factoryName: Hammer
+  inputResourceType: 0100000002000000
+  inputResourceCount: 0200000003000000
+  outputResourceType: 04000000
+  outputResourceCount: 01000000
   timeToProduce: 0.71
   timeToSwitch: 0.1
 --- !u!114 &8026037958465213539

@@ -33,16 +33,16 @@ public class Warehouse : MonoBehaviour
 		
 
 		
-		types = new ResourceType[resourceCount];
-		counts = new int[resourceCount];
+		//types = new ResourceType[resourceCount];
+		//counts = new int[resourceCount];
 		
-		types[0] = ResourceType.Money;
+		//types[0] = ResourceType.Money;
 		
-		types[1] = ResourceType.Wood;
+		//types[1] = ResourceType.Wood;
 		
-		types[2] = ResourceType.Stone;
+		//types[2] = ResourceType.Stone;
 		
-		types[3] = ResourceType.Iron;
+		//types[3] = ResourceType.Iron;
 		
 	}
 

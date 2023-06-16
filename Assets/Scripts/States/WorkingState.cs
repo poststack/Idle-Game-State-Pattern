@@ -46,14 +46,15 @@ public class WorkingState : BaseState
 	public override void LoadInput()
 	{
 		factoryController.warehouse.SpendResource
-			(inputResourceType,inputResourceCount);
+			(factory.inputResourceType[0],
+			factory.inputResourceCount[0]);
 	}
 	public override void UnloadInput() {}
 
 	//output resource
 	public override void UnloadOutput(){
 		factoryController.warehouse.AddResource
-		(factory.outputResourceType,
-		 factory.outputResourceCount);
+		(factory.outputResourceType[0],
+		 factory.outputResourceCount[0]);
 	}
 }

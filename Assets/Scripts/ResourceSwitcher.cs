@@ -61,7 +61,7 @@ public class ResourceSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExi
 	{
 		image.sprite = sprites[currentIndex];
 		ResourceName.text = GetEnumStringByIndex(currentIndex);
-		factory.outputResourceType = GetEnumValueByIndex(currentIndex);
+		factory.outputResourceType[0] = GetEnumValueByIndex(currentIndex);
 
 	}
 

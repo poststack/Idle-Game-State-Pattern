@@ -29,9 +29,11 @@ public class NoInputState : BaseState
 	public void CheckInput()
 	
 	{
-		//factory.DebugLog(_stateSwitcher.ToString());
+		//Проверить все 
 		if (warehouse.CanSpendResource
-			(inputResourceType,inputResourceCount)== true)
+			(factory.inputResourceType[0],
+			factory.inputResourceCount[0])
+			== true)
 		{
 			factoryController.SwitchState<HasInputState>();
 		}
@@ -41,6 +43,18 @@ public class NoInputState : BaseState
 			//factory.SwitchState<IdleState>();
 		}
 	}
+	
+	//private bool CheckResources(ResourceType[] requiredResources, int[] amounts)
+	//{
+	//	foreach (ResourceType resource in requiredResources)
+	//	{
+	//		if (resource.Amount > ResourceManager.Instance.GetResourceAmount(resource.Type))
+	//		{
+	//			return false;
+	//		}
+	//	}
+	//	return true;
+	//}	
 	
 	//input resource
 	public override void LoadInput(){}

@@ -8,16 +8,16 @@ public abstract class BaseState
 	protected FactoryStateMachine factoryController;
 	protected Warehouse warehouse;
 	
-	//input
-	protected ResourceType inputResourceType;
-	protected int inputResourceCount;
+	////input
+	//protected ResourceType inputResourceType;
+	//protected int inputResourceCount;
 	
-	//output
-	protected ResourceType outputResourceType;
-	protected int outputResourceCount;
+	////output
+	//protected ResourceType outputResourceType;
+	//protected int outputResourceCount;
 	
-	//time
-	protected float timeToProduce;
+	////time
+	//protected float timeToProduce;
 	
 	
 	public BaseState(
